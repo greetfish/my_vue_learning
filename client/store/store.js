@@ -45,7 +45,13 @@ export default () => {
           text: 2
         }
       }
-    }
+    },
+    // 声明插件
+    plugins: [
+      (store) => {
+        console.log('my store plugin invoked')
+      }
+    ]
   })
 
   if (module.hot) { // 添加store的热更新功能，以解决每次更改store代码后，前端页面都要重新刷新才生效的问题
