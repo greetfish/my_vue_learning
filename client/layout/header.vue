@@ -7,7 +7,7 @@
 export default {
   methods: {
     getStyleElement () {
-      console.log('----' + this.$style.mainHeader)
+      // console.log('----' + this.$style.mainHeader)
     }
   }
 }
@@ -18,7 +18,7 @@ export default {
 }
 .main-header h1{
     font-size: 100px;
-    color: rgb(66, 66, 66,0.4);
+    color: rgba(241, 87, 87, 0.4);
     font-weight: 100;
     margin: 20px;
 }

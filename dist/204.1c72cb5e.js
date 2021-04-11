@@ -1,0 +1,1 @@
+(self.webpackChunkvue_ssr_tech=self.webpackChunkvue_ssr_tech||[]).push([[204],{204:(e,s,l)=>{"use strict";l.r(s),l.d(s,{default:()=>t});const t=(0,l(900).Z)({},(function(){var e=this,s=e.$createElement;return(e._self._c||s)("div",[e._v("login page")])}),[],!1,null,null,null).exports}}]);

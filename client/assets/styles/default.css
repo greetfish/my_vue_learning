@@ -1,3 +1,11 @@
 a{
     color: black;
 }
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .8s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0
+}

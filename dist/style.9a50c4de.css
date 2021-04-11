@@ -1,0 +1,49 @@
+
+.main-header{
+    text-align: center;
+}
+.main-header h1{
+    font-size: 100px;
+    color: rgba(241, 87, 87, 0.4);
+    font-weight: 100;
+    margin: 20px;
+}
+
+#footer{
+    margin-top:40px;
+    text-align: center;
+    color: #eeeeee;
+    font-size: 10px;
+    text-shadow: 0 1px 0 #adadad;
+}
+
+#app[data-v-5a507e70]{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+#cover[data-v-5a507e70]{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: #999;
+    opacity: .9;
+    z-index: -1;
+}
+
+a{
+    color: black;
+}
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .8s;
+}
+
+.fade-enter, .fade-leave-to {
+    opacity: 0
+}
+

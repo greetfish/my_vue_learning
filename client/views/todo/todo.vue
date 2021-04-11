@@ -20,6 +20,7 @@
       @del="deleteTodo"
       @item_change="itemChange"
     ></item>
+    <!-- <router-view /> -->
   </section>
 </template>
 
@@ -28,6 +29,31 @@ import Item from './item.vue'
 import Tabs from './tabs.vue'
 let id = 0
 export default {
+  // 在组件内部也可以设置导航守卫方法
+  beforeRouteEnter (to, from, next) {
+    console.log('todo before enter')
+    next(vm => { // 可以通过vm拿到当前组件的this  一般来说是在这里获取数据，塞到页面当中
+      console.log('after enter vm.id is ', vm.id)
+    })
+  },
+  // 在组件内部也可以设置导航守卫方法
+  beforeRouteUpdate (to, from, next) {
+    console.log('todo update enter')
+    next()
+  },
+  // 在组件内部也可以设置导航守卫方法
+  beforeRouteLeave (to, from, next) {
+    // 可以在leave中做一些提醒用户保存修改
+    console.log('todo leave enter')
+    // if (global.confirm('are you sure ?')) {
+    //   next()
+    // }
+    next()
+  },
+  props: ['id'],
+  mounted () {
+    console.log('来自URL的传参，router自动整合到props 的id变量中: ' + this.id)
+  },
   data () {
     return {
       todos: [],
