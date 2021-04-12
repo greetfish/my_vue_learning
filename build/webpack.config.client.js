@@ -1,8 +1,10 @@
+// 搭建一个简单todo应用的配置
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HTMLPlugin = require('html-webpack-plugin')
 // const ExtractPlugin = require('extract-text-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const VueClientPlugin = require('vue-server-renderer/client-plugin')
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 // const { WebpackOptionsApply } = require('webpack')
@@ -32,7 +34,8 @@ const defaultPlugins = [
   new VueLoaderPlugin(),
   new HTMLPlugin({
     template: path.join(__dirname, 'template.html')
-  })
+  }),
+  new VueClientPlugin()
 ]
 if (isDEV) {
   config = merge(baseConfig, {

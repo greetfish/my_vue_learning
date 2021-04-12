@@ -7,6 +7,9 @@ export default [
     redirect: '/app'
   },
   {
+    path: '/favicon.ico'
+  },
+  {
     path: '/app',
     // 异步加载组件 ，不在本配置文件的头部import组件，而是在这里import
     component: () => import('../views/todo/todo.vue')

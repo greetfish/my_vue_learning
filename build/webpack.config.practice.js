@@ -1,3 +1,4 @@
+// 为代码练习而准备的配置
 const path = require('path')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HTMLPlugin = require('html-webpack-plugin')
