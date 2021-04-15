@@ -4,7 +4,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const HTMLPlugin = require('html-webpack-plugin')
 // const ExtractPlugin = require('extract-text-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const VueClientPlugin = require('vue-server-renderer/client-plugin')
+const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 // const { WebpackOptionsApply } = require('webpack')
@@ -20,6 +20,7 @@ const devServer = {
   overlay: {
     errors: true
   },
+  headers: { 'Access-Control-Allow-Origin': '*' },
   historyApiFallback: {
     // disableDotRule: true
     index: '/public/index.html'
@@ -35,7 +36,7 @@ const defaultPlugins = [
   new HTMLPlugin({
     template: path.join(__dirname, 'template.html')
   }),
-  new VueClientPlugin()
+  new VueSSRClientPlugin()
 ]
 if (isDEV) {
   config = merge(baseConfig, {
@@ -83,11 +84,12 @@ if (isDEV) {
   config = merge(baseConfig, {
     mode: 'production',
     entry: {
-      app: path.join(__dirname, '../client/index.js')
+      app: path.join(__dirname, '../client/client-entry.js')
       // vendor:['vue']
     },
     output: {
-      filename: '[name].[chunkhash:8].js'
+      filename: '[name].[chunkhash:8].js',
+      publicPath: '/public/'
     },
     module: {
       rules: [
@@ -125,9 +127,11 @@ if (isDEV) {
     },
     optimization: {
       splitChunks: {
-        chunks: 'all'
+        chunks: 'initial'
       },
-      runtimeChunk: true
+      runtimeChunk: {
+        name: 'manifest'
+      }
     },
     plugins: defaultPlugins.concat([
       new MiniCssExtractPlugin({

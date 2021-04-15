@@ -29,6 +29,9 @@ import Item from './item.vue'
 import Tabs from './tabs.vue'
 let id = 0
 export default {
+  metaInfo: {
+    title: 'my-todo-component'
+  },
   // 在组件内部也可以设置导航守卫方法
   beforeRouteEnter (to, from, next) {
     console.log('todo before enter')

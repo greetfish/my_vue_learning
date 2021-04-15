@@ -17,6 +17,8 @@
         <transition name="fade">
             <router-view />
         </transition>
+        <button @click="notify">notify演示</button>
+        <!-- <notification content="test notify"></notification> -->
         <Footer></Footer>
         <!-- <router-view name="a" /> -->
     </div>
@@ -31,10 +33,15 @@ import {
   mapMutations,
   mapActions
 } from 'vuex'
+// import Notification from './components/notification/notification.vue'
 export default {
+  metaInfo: {
+    title: 'my-vue-app'
+  },
   components: {
     Header,
     Footer
+    // Notification
   },
   mounted () {
     // 这个方法可以打印路由传参的数据，在组件中也可以打印 ，但是不建议这样使用
@@ -69,7 +76,14 @@ export default {
   methods: {
     // 也可以通过mapMutations和mapActions来自动匹配store中相应的方法
     ...mapActions(['updateCountSync', 'module_a/add']),
-    ...mapMutations(['updateCount', 'module_a/updateText'])
+    ...mapMutations(['updateCount', 'module_a/updateText']),
+    notify () {
+      this.$notify({
+        content: 'test $notify',
+        btn: 'close',
+        autoClose: 3000
+      })
+    }
   },
   computed: {
     // 也可以使用mapState 和mapGetters来更方便的使用Vuex
