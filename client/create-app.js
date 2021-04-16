@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Vuex from 'vuex'
 import Meta from 'vue-meta'
 import Notification from './components/notification'
+import Tabs from './components/tabs'
 
 import App from './app.vue'
 import createStore from './store/store'
@@ -14,6 +15,7 @@ Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(Meta)
 Vue.use(Notification) // 使用自定义的全局组件（插件）
+Vue.use(Tabs) // 使用自定义的全局组件（插件）
 
 export default () => {
   const router = createRouter()
