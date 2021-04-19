@@ -20,13 +20,13 @@
       autofocus="autofocus"
       v-model="inputContent"
       placeholder="接下去要做什么"
-      @keyup.enter="addTodo"
+      @keyup.enter="handleAdd"
     />
     <Helper
     :filter="filter"
     :todos="todos"
     @toggle="toggleFilter"
-    @clearall="doClear"
+    @clearall="clearAllCompleted"
     ></Helper>
     <item
       :todo="todo"
@@ -34,15 +34,19 @@
       :key="todo.id"
       @del="deleteTodo"
       @item_change="itemChange"
+      @toggle="toggleTodoState"
     ></item>
     <!-- <router-view /> -->
   </section>
 </template>
 
 <script>
+import {
+  mapState,
+  mapActions
+} from 'vuex'
 import Item from './item.vue'
 import Helper from './helper.vue'
-let id = 0
 export default {
   metaInfo: {
     title: 'my-todo-component'
@@ -71,10 +75,11 @@ export default {
   props: ['id'],
   mounted () {
     console.log('来自URL的传参，router自动整合到props 的id变量中: ' + this.id)
+    this.fetchTodos()
   },
   data () {
     return {
-      todos: [],
+      // todos: [],
       filter: 'all',
       tabValue: '1',
       inputContent: ''
@@ -85,6 +90,7 @@ export default {
     Helper
   },
   computed: {
+    ...mapState(['todos']),
     filteredTodos () {
       if (this.filter === 'all') {
         return this.todos
@@ -94,20 +100,47 @@ export default {
     }
   },
   methods: {
-    addTodo (e) {
-      this.todos.unshift({
-        id: id++,
-        content: e.target.value.trim(),
+    ...mapActions([
+      'fetchTodos',
+      'addTodo',
+      'deleteTodo',
+      'updateTodo',
+      'deleteAllCompleted'
+    ]),
+    handleAdd (e) {
+      const content = e.target.value.trim()
+      if (!content) {
+        this.$notify({
+          content: '必须输入todo内容'
+        })
+        return
+      }
+      const todo = {
+        content,
         completed: false
-      })
+      }
+      this.addTodo(todo)
       e.target.value = ''
     },
-    deleteTodo (id) {
-      this.todos.splice(
-        this.todos.findIndex((todo) => todo.id === id), 1)
+    // deleteTodo (id) {
+    //   this.todos.splice(
+    //     this.todos.findIndex((todo) => todo.id === id), 1)
+    // },
+    toggleTodoState (todo) {
+      this.updateTodo({
+        id: todo.id,
+        // todo 需要通过深拷贝
+        todo: Object.assign({}, todo, {
+          completed: !todo.completed
+        })
+      })
     },
     toggleFilter (state) {
       this.filter = state
+    },
+    clearAllCompleted () {
+      // this.todos = this.todos.filter(todo => !todo.completed)
+      this.deleteAllCompleted()
     },
     doClear () {
       this.todos = this.todos.filter(todo => !todo.completed)

@@ -67,6 +67,15 @@ const notify = (options) => {
     instance.vm.visible = false
   })
 
+  // 监听鼠标移出事件
+  instance.vm.$on('doCreateTimmer', () => {
+    instance.createTimmer()
+  })
+  // 监听鼠标移入事件
+  instance.vm.$on('doClearTimmer', () => {
+    instance.clearTimer()
+  })
+
   return instance.vm
 }
 

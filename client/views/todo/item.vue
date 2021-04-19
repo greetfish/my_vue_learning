@@ -1,6 +1,12 @@
 <template>
   <div :class = "['todo-item ', todo.completed ? 'completed' : '']">
-    <input type = "checkbox" class = "toggle" :value="todo.completed" @click="$emit('item_change', todo.id)"/>
+    <input
+      type = "checkbox"
+      class = "toggle"
+      :checked="todo.completed"
+      :value="todo.completed"
+      @click="handleToggle"
+    />
     <label>{{ todo.content }}</label>
     <button class="destroy" @click="deleteTodo"></button>
   </div>
@@ -17,6 +23,10 @@ export default {
   methods: {
     deleteTodo () {
       this.$emit('del', this.todo.id)
+    },
+    handleToggle (e) {
+      e.preventDefault()
+      this.$emit('toggle', this.todo)
     }
   }
 }

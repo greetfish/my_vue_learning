@@ -4,8 +4,8 @@
       class="notification"
       :style="style"
       v-show="visible"
-      @mouseenter="clearTimmer"
-      @mouseleave="createTimmer"
+      @mouseenter="beforeClearTimmer"
+      @mouseleave="beforeCreateTimmer"
     >
       <span class="content">{{content}}</span>
       <a class="btn" @click="handleClose">{{btn}}</a>
@@ -45,11 +45,11 @@ export default {
       this.$emit('closed')
     },
     afterEnter () {},
-    createTimmer () {
-      console.log('父class中 鼠标移入')
+    beforeCreateTimmer () {
+      this.$emit('doCreateTimmer')
     }, // 鼠标移出时，重新开始自动消失计时
-    clearTimmer () {
-      console.log('父class中 鼠标出')
+    beforeClearTimmer () {
+      this.$emit('doClearTimmer')
     } // 鼠标移入在关注notify时，取消自动消失功能
   }
 }

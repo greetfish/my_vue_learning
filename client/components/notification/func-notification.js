@@ -35,7 +35,7 @@ export default {
       this.height = this.$el.offsetHeight
     }
   },
-  beforeDestory () {
+  beforeDestroy () {
     this.clearTimer()
   },
   data () {

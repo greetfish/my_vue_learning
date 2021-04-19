@@ -1,6 +1,9 @@
 <template>
     <div id="app">
         <div id="cover"></div>
+        <div id="loading" v-show="loading">
+          <loading></loading>
+        </div>
         <Header></Header>
         <p>count: {{count}}</p>
         <p>fullname: {{fullName}}</p>
@@ -14,7 +17,8 @@
         <router-link to="/login/exact">login exact</router-link>
         <!-- <todo></todo> -->
         <!-- 可以包个动画 transition,相应的在default.css中写相关的动画样式-->
-        <transition name="fade">
+        <!-- 先出后进的动画设置，而不是还没出完就进，减少页面抖动 -->
+        <transition name="fade" mode="out-in">
             <router-view />
         </transition>
         <button @click="notify">notify演示</button>
@@ -27,6 +31,7 @@
 <script>
 import Header from './layout/header.vue'
 import Footer from './layout/footer.jsx'
+import Loading from './components/loading/loading.vue' // 数据加载时的loading动画效果
 import {
   mapState,
   mapGetters,
@@ -40,7 +45,8 @@ export default {
   },
   components: {
     Header,
-    Footer
+    Footer,
+    Loading
     // Notification
   },
   mounted () {
@@ -87,7 +93,7 @@ export default {
   },
   computed: {
     // 也可以使用mapState 和mapGetters来更方便的使用Vuex
-    ...mapState(['count']),
+    ...mapState(['count', 'loading']),
     // 也可以这样写,换一个名字，并且可以对state中的数据做处理后输出
     ...mapState({
       counter: (state) => state.count,
@@ -114,7 +120,7 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style lang="stylus" scoped>
     #app{
         position: absolute;
         left: 0;
@@ -131,5 +137,17 @@ export default {
         background-color: #999;
         opacity: .9;
         z-index: -1;
+    }
+    #loading{
+      position fixed
+      top 0
+      right 0
+      bottom 0
+      left 0
+      background-color rgba(255,255,255,.3)
+      z-index 99
+      display flex
+      align-items center
+      justify-content center
     }
 </style>
