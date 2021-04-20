@@ -68,4 +68,12 @@ config = merge(baseConfig, {
   ]
 })
 
+// 直接指定db.js作为model,方便服务器端渲染时获取数据后再渲染
+config.resolve = {
+  alias: {
+    // eslint-disable-next-line quote-props
+    'model': path.join(__dirname, '../client/model/server-model.js')
+  }
+}
+
 module.exports = config

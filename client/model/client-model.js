@@ -4,6 +4,9 @@ import axios from 'axios'
 import { createError } from './util'
 
 const request = axios.create({
+  // 这样写目的在于服务器端渲染时获取数据，/前不会自动加上http://127.0.0.1:3333/， 这样就可以自己给自己发请求了。
+  // 但是，这样存在问题是，自己给自己发请求，就拿不到cookie了，没有办法判断当前这个请求有么有登录
+  // baseURL: process.env.VUE_ENV === 'server' ? 'http://127.0.0.1:3333/' : '/'
   baseURL: '/'
 })
 

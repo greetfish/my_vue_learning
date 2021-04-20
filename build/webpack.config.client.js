@@ -145,4 +145,12 @@ if (isDEV) {
   })
 }
 
+// 指定使用这个文件作为model
+config.resolve = {
+  alias: {
+    // eslint-disable-next-line quote-props
+    'model': path.join(__dirname, '../client/model/client-model.js')
+  }
+}
+
 module.exports = config

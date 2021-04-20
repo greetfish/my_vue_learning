@@ -1,5 +1,6 @@
 // 因为mutations的方法只能是同步方法，异步代码只能写在actions里面
-import model from '../../model/client-model'
+// import model from '../../model/client-model'
+import model from 'model' // 能这样引用是因为在webpack config里面指定了model的路径
 import notify from '../../components/notification/function'
 import bus from '../../util/bus'
 const handleError = (err) => {
@@ -20,7 +21,7 @@ export default {
   },
   fetchTodos ({ commit }) {
     commit('startLoading') // 开启数据加载动画
-    model.getAllTodos()
+    return model.getAllTodos() // 这里返回的是一个Promise对象
       .then(data => {
         commit('fillTodos', data) // 在mutations中中调用fillTodos方法
         commit('endLoading') // 关闭数据加载动画

@@ -77,6 +77,10 @@ export default {
     console.log('来自URL的传参，router自动整合到props 的id变量中: ' + this.id)
     this.fetchTodos()
   },
+  // 声明一个非生命周期方法,用于在服务器端渲染时提前准备数据
+  asyncData ({ store }) {
+    return store.dispatch('fetchTodos') // 返回的是todos数据
+  },
   data () {
     return {
       // todos: [],
