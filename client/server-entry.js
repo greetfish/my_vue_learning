@@ -25,9 +25,9 @@ export default context => {
         }
       })).then(data => {
         console.log(data)
+        context.meta = app.$meta()
+        resolve(app)
       })
-      context.meta = app.$meta()
-      resolve(app)
     })
   })
 }

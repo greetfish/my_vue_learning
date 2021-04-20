@@ -1,40 +1,47 @@
 {
     "presets": [
-        "@babel/preset-env"
-        // "stage-1"
+        [
+            "@babel/preset-env",
+            {
+                "targets": {
+                    "node": "current"
+                }
+            }
+            // "stage-1"
+        ]
     ],
     "plugins": [
         "transform-vue-jsx",
         "syntax-dynamic-import"
-    ],
+    ]
     // 解决这个报错 [vue-router] uncaught error during route navigation: ReferenceError: regeneratorRuntime is not defined
-    "env": {
-        "browser": {
-            "presets": [
-                [
-                    "env",
-                    {
-                        "targets": {
-                            "browsers": [
-                                "last 2 versions",
-                                "safari >= 7"
-                            ]
-                        }
-                    }
-                ]
-            ]
-        },
-        "node": {
-            "presets": [
-                [
-                    "env",
-                    {
-                        "targets": {
-                            "node": "current"
-                        }
-                    }
-                ]
-            ]
-        }
-    }
+    // "env": {
+    //     "browser": {
+    //         "presets": [
+    //             [
+    //                 "env",
+    //                 {
+    //                     "targets": {
+    //                         "browsers": [
+    //                             "last 2 versions",
+    //                             "safari >= 7"
+    //                         ]
+    //                     }
+    //                 }
+    //             ]
+    //         ]
+    //     },
+    //     "node": {
+    //         "presets": [
+    //             [
+    //                 "env",
+    //                 {
+    //                     "targets": {
+    //                         "node": "current"
+    //                     }
+    //                 }
+    //             ]
+    //         ]
+    //     }
+    // }
 }
