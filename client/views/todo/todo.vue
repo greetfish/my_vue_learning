@@ -75,11 +75,19 @@ export default {
   props: ['id'],
   mounted () {
     console.log('来自URL的传参，router自动整合到props 的id变量中: ' + this.id)
-    this.fetchTodos()
+    // 因为服务器端渲染已经加载了todos数据，所以判断下没有todos数据时才去请求一遍，否则不用再次请求
+    if (this.todos && this.todos.length < 1) {
+      this.fetchTodos()
+    }
   },
   // 声明一个非生命周期方法,用于在服务器端渲染时提前准备数据
   asyncData ({ store }) {
-    return store.dispatch('fetchTodos') // 返回的是todos数据
+    // 判断如果登陆了，才能在服务器端渲染时获取todos数据
+    if (store.state.user) {
+      return store.dispatch('fetchTodos') // 返回的是todos数据
+    } else {
+      return Promise.resolve()
+    }
   },
   data () {
     return {
