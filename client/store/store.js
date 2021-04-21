@@ -14,38 +14,38 @@ export default () => {
     mutations, // 单独从文件引入mutations，方便后期维护
     getters,
     actions,
-    modules: { // 使用模块功能
-      module_a: { // 模块A
-        namespaced: true, // 允许mutation的方法名和其他模块有重复，但是这样调用的时候需要model_a/functionName这样调用
-        state: {
-          text: 1
-        },
-        mutations: { // 允许mutation的方法名和其他模块有重复，但是这样调用的时候需要model_a/functionName这样调用
-          updateText (state, text) {
-            console.log('model_a.state', state)
-            state.text = text
-          }
-        },
-        getters: {
-          // 第二个参数是全局的getters方法，第三个参数可以获取全局的state数据，所以也可以通过state.module_b.xxx来获取其他模块的数据
-          textPlus (state, getters, rootState) {
-            return state.text + 1
-          }
-        },
-        // 所以actions也和getters一样
-        actions: {
-          add ({ state, commit, rootState }) {
-            commit('updateText', rootState.count)
-            commit('updateCount', 996, { root: true })
-          }
-        }
-      },
-      module_b: { // 模块B
-        state: {
-          text: 2
-        }
-      }
-    },
+    // modules: { // 使用模块功能
+    //   module_a: { // 模块A
+    //     namespaced: true, // 允许mutation的方法名和其他模块有重复，但是这样调用的时候需要model_a/functionName这样调用
+    //     state: {
+    //       text: 1
+    //     },
+    //     mutations: { // 允许mutation的方法名和其他模块有重复，但是这样调用的时候需要model_a/functionName这样调用
+    //       updateText (state, text) {
+    //         console.log('model_a.state', state)
+    //         state.text = text
+    //       }
+    //     },
+    //     getters: {
+    //       // 第二个参数是全局的getters方法，第三个参数可以获取全局的state数据，所以也可以通过state.module_b.xxx来获取其他模块的数据
+    //       textPlus (state, getters, rootState) {
+    //         return state.text + 1
+    //       }
+    //     },
+    //     // 所以actions也和getters一样
+    //     actions: {
+    //       add ({ state, commit, rootState }) {
+    //         commit('updateText', rootState.count)
+    //         commit('updateCount', 996, { root: true })
+    //       }
+    //     }
+    //   },
+    //   module_b: { // 模块B
+    //     state: {
+    //       text: 2
+    //     }
+    //   }
+    // },
     // 声明插件
     plugins: [
       (store) => {

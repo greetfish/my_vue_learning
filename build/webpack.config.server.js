@@ -1,7 +1,7 @@
 // 为服务器端渲染做的配置
 const path = require('path')
 // const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const VueServerPlugin = require('vue-server-renderer/server-plugin')
+// const VueServerPlugin = require('vue-server-renderer/server-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const webpack = require('webpack')
 const { merge } = require('webpack-merge')
@@ -63,7 +63,7 @@ config = merge(baseConfig, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'
     }),
-    new VueServerPlugin(),
+    // new VueServerPlugin(), 去掉这行,既不用bundle-render的方式服务端渲染，目的是为了改用另一种服务端渲染的方式 ，可以取消注释
     new VueLoaderPlugin()
   ]
 })

@@ -7,9 +7,9 @@
         <Header></Header>
         <p>count: {{count}}</p>
         <p>fullname: {{fullName}}</p>
-        <p>textPlus = textA + 1  : {{textPlus}}</p>
-        <p>textA: {{textA}}</p>
-        <p>textB: {{textB}}</p>
+        <!-- <p>textPlus = textA + 1  : {{textPlus}}</p> -->
+        <!-- <p>textA: {{textA}}</p> -->
+        <!-- <p>textB: {{textB}}</p> -->
         <!-- <router-link :to="{name: 'app'}">app</router-link> -->
         <router-link to="/app/2/kkk">app</router-link>
         <router-link to="/login">login</router-link>
@@ -34,9 +34,9 @@ import Footer from './layout/footer.jsx'
 import Loading from './components/loading/loading.vue' // 数据加载时的loading动画效果
 import {
   mapState,
-  mapGetters,
-  mapMutations,
-  mapActions
+  mapGetters
+  // mapMutations,
+  // mapActions
 } from 'vuex'
 // import Notification from './components/notification/notification.vue'
 export default {
@@ -65,8 +65,8 @@ export default {
       num: 6,
       time: 3000
     })
-    this.['module_a/updateText']('123') // 调用store中模块A的mutation方法
-    this.['module_a/add']()
+    // this.['module_a/updateText']('123') // 调用store中模块A的mutation方法
+    // this.['module_a/add']()
     // 调用mutations方法来修改store中的数据
     // let i = 0
     // setInterval(() => {
@@ -81,8 +81,8 @@ export default {
   },
   methods: {
     // 也可以通过mapMutations和mapActions来自动匹配store中相应的方法
-    ...mapActions(['updateCountSync', 'module_a/add']),
-    ...mapMutations(['updateCount', 'module_a/updateText']),
+    // ...mapActions(['updateCountSync', 'module_a/add']),
+    // ...mapMutations(['updateCount', 'module_a/updateText']),
     notify () {
       this.$notify({
         content: 'test $notify',
@@ -96,23 +96,23 @@ export default {
     ...mapState(['count', 'loading']),
     // 也可以这样写,换一个名字，并且可以对state中的数据做处理后输出
     ...mapState({
-      counter: (state) => state.count,
-      textB: state => state.module_b.text
+      counter: (state) => state.count
+      // textB: state => state.module_b.text
     }),
     // count () {
     //   return this.$store.state.count // 将count与store中的count绑定
     // },
     // 也可以使用mapState 和mapGetters来更方便的使用Vuex
     ...mapGetters({
-      fullName: 'fullName',
-      textPlus: 'module_a/textPlus'
-    }),
+      fullName: 'fullName'
+      // textPlus: 'module_a/textPlus'
+    })
     // fullName () {
     //   return this.$store.getters.fullName
     // }
-    textA () { // 返回模块A的数据  当然，也可以通过上面的...mapState来匹配a模块中的数据，如textB改为了...mapstate隐射
-      return this.$store.state.module_a.text
-    }
+    // textA () { // 返回模块A的数据  当然，也可以通过上面的...mapState来匹配a模块中的数据，如textB改为了...mapstate隐射
+    //   return this.$store.state.module_a.text
+    // }
     // textB () { // 返回模块B的数据
     //   return this.$store.state.module_b.text
     // }

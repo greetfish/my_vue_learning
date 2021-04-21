@@ -1,5 +1,5 @@
-// import Todo from '../views/todo/todo.vue'
-// import Login from '../views/login/login.vue'
+import Todo from '../views/todo/todo.vue'
+import Login from '../views/login/login.vue'
 
 export default [
   {
@@ -9,7 +9,7 @@ export default [
   {
     path: '/app',
     // 异步加载组件 ，不在本配置文件的头部import组件，而是在这里import
-    component: () => import('../views/todo/todo.vue')
+    component: Todo
   },
   {
     name: 'app',
@@ -18,7 +18,7 @@ export default [
     props: true,
     // component: Todo,
     // 异步加载组件 ，不在本配置文件的头部import组件，而是在这里import
-    component: () => import('../views/todo/todo.vue'),
+    component: Todo,
     // 如果有多个router-view的话 ，这样的情况可以适合根据不同路由切换不同的导航或者头部
     // components: {
     //   default: Todo,
@@ -42,7 +42,7 @@ export default [
     path: '/login',
     // component: Login,
     // 异步加载组件 ，不在本配置文件的头部import组件，而是在这里import
-    component: () => import('../views/login/login.vue'),
+    component: Login,
     // 此处也可以设置导航守卫方法
     beforeEnter (to, from, next) {
       console.log('login route before enter')
@@ -53,6 +53,6 @@ export default [
     path: '/login/exact',
     // component: Login,
     // 异步加载组件 ，不在本配置文件的头部import组件，而是在这里import
-    component: () => import('../views/login/login.vue')
+    component: Login
   }
 ]
