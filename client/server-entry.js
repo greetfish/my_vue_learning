@@ -22,6 +22,7 @@ export default context => {
         if (Component.asyncData) {
           return Component.asyncData({
             route: router.currentRoute,
+            router,
             store
           })
         } else {
@@ -32,6 +33,7 @@ export default context => {
         // console.log(store.state)
         context.meta = app.$meta()
         context.state = store.state // 会在服务器端渲染后的网页源码中生成一个window.__INITIAL_STATE__变量保存渲染前请求的state数据
+        context.router = router
         resolve(app)
       })
     })

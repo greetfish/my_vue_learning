@@ -47,6 +47,7 @@ import {
 } from 'vuex'
 import Item from './item.vue'
 import Helper from './helper.vue'
+import notify from '../../components/notification/function'
 export default {
   metaInfo: {
     title: 'my-todo-component'
@@ -81,11 +82,15 @@ export default {
     }
   },
   // 声明一个非生命周期方法,用于在服务器端渲染时提前准备数据
-  asyncData ({ store }) {
+  asyncData ({ store, router }) {
     // 判断如果登陆了，才能在服务器端渲染时获取todos数据
     if (store.state.user) {
       return store.dispatch('fetchTodos') // 返回的是todos数据
     } else {
+      router.replace('/login') // 如果没有登录，直接redirect到login页面
+      notify({
+        content: '请先登录'
+      })
       return Promise.resolve()
     }
   },
