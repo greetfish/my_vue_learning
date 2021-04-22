@@ -56,12 +56,12 @@ export default {
   beforeRouteEnter (to, from, next) {
     console.log('todo before enter')
     next(vm => { // 可以通过vm拿到当前组件的this  一般来说是在这里获取数据，塞到页面当中
-      console.log('after enter vm.id is ', vm.id)
+      console.log('after enter vm.id is :', vm.id)
     })
   },
   // 在组件内部也可以设置导航守卫方法
   beforeRouteUpdate (to, from, next) {
-    console.log('todo update enter')
+    console.log('todo update enter ')
     next()
   },
   // 在组件内部也可以设置导航守卫方法

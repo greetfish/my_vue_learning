@@ -131,16 +131,18 @@ if (isDEV) {
     },
     optimization: {
       splitChunks: {
-        chunks: 'initial'
+        chunks: 'all'
       },
       runtimeChunk: {
         name: 'manifest'
-      }
+      },
+      chunkIds: 'deterministic'
     },
     plugins: defaultPlugins.concat([
       new MiniCssExtractPlugin({
         filename: 'style.[contenthash:8].css'
       })
+      // new webpack.NamedChunksPlugin()
     ])
   })
 }
